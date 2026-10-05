@@ -35,7 +35,7 @@
                             1001
                         </td>
                         <td class="px-2">
-                            Sudirman Joko Spendi
+                            Membuat Mockup System Untuk Akun A
                         </td>
                         <td class="flex gap-2 justify-end px-2 py-2">
                             <a href="{{ route('dealers.show', 1) }}" class="bg-blue-400 font-black text-white px-4 py-2 rounded-md">Detail</a>

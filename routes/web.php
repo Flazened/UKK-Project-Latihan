@@ -18,14 +18,14 @@ Route::name('dealers.')->prefix('dealers')->group(function(){
 //Page
 Route::get('/', [DealerController::class, 'index'])->name('index');
 Route::get('/create', [DealerController::class, 'create'])->name('create');
-Route::get('/{dealers}/edit', [DealerController::class, 'edit'])->name('edit');
-Route::get('/{dealers}', [DealerController::class, 'show'])->name('show');
+Route::get('/{dealer}/edit', [DealerController::class, 'edit'])->name('edit');
+Route::get('/{dealer}', [DealerController::class, 'show'])->name('show');
 
 
 //Logical
 Route::post('/', [DealerController::class, 'store'])->name('store');
-Route::put('/{dealers}', [DealerController::class, 'update'])->name('update');
-Route::delete('/{dealers}', [DealerController::class, 'destroy'])->name('destroy');
+Route::put('/{dealer}', [DealerController::class, 'update'])->name('update');
+Route::delete('/{dealer}', [DealerController::class, 'destroy'])->name('destroy');
 });
 
 

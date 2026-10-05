@@ -27,26 +27,38 @@
                 </thead>
 
                 <tbody>
+                    @forelse ($dealers as $dealer)
+                        
+                    
                     <tr class="rounded-3xl">
-                        <td class="px-2 font-black">
-                            1
+                        <td class="px-4 text-2xl font-black">
+                            {{ $loop->iteration }}
                         </td>
                         <td class="px-2">
-                            1001
+                            {{ $dealer->code }}
                         </td>
                         <td class="px-2">
-                            Sudirman Joko Spendi
+                            {{ $dealer->name }}
                         </td>
                         <td class="flex gap-2 justify-end px-2 py-2">
-                            <a href="{{ route('dealers.show', 1) }}" class="bg-blue-400 font-black text-white px-4 py-2 rounded-md">Detail</a>
-                            <a href="{{ route('dealers.edit', 1) }}" class="bg-yellow-400 font-black text-white px-4 py-2 rounded-md">Edit</a>
-                            <form action="{{ route('dealers.destroy', 1) }}" method="POST" class="inline">
+                            <a href="{{ route('dealers.show', ['dealer' => $dealer->id]) }}" class="bg-blue-400 font-black text-white px-4 py-2 rounded-md">Detail</a>
+                            <a href="{{ route('dealers.edit', ['dealer' => $dealer->id]) }}" class="bg-yellow-400 font-black text-white px-4 py-2 rounded-md">Edit</a>
+
+                            <form method="POST" class="inline" 
+                                onsubmit="return confirm('Hapus data siswa ini dari buku induk?')"
+                                action="{{ route('dealers.destroy', ['dealer' => $dealer->id]) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-400 font-black text-white px-4 py-2 rounded-md">Delete</button>
                             </form>
+
                         </td>
                     </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center p-4 py-2">Data Dealer Tidak Tersedia</td>
+                    </tr>
+                    @endforelse
                 </tbody>
 
             </table>
