@@ -72,7 +72,7 @@ class AreaController extends Controller
             ->with('Succes', 'Area Berhasil Diubah');
     }
 
-    public function destory(Area $area){
+    public function destroy(Area $area){
         $area->delete();
 
         return redirect()->route('areas.index')
