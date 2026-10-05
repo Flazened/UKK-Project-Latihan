@@ -52,7 +52,7 @@ class DealerController extends Controller
     public function store(Request $request ){
         $validatedRequest = $request->validate([
             'name' => ['required', 'string'],
-            'code' => ['required', 'string', 'max:4', 'min:4'],
+            'code' => ['required', 'string', 'size:4', 'unique:dealers,code'],
         ]);
 
         Dealer::create($validatedRequest);
@@ -68,10 +68,10 @@ class DealerController extends Controller
     {
         $validatedRequest = $request->validate([
             'name' => ['required', 'string'],
-            'code' => ['required', 'string'],
+            'code' => ['required', 'string', 'size:4', 'unique:dealers,code,' . $dealer->id],
         ]);
 
-        Dealer::update( $validatedRequest);
+        $dealer->update( $validatedRequest);
         
         return redirect()->route('dealers.index')
             ->with('succes','Berhasil Mengubah data Dealer');

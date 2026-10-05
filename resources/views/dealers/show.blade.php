@@ -18,7 +18,7 @@
                             
                         <dt class="uppercase tracking-[0.1em] text-xs text-slate-800">Code Dealer :</dt> 
                             
-                        <dd class="font-medium text-[#16213A]">6767</dd> 
+                        <dd class="font-medium text-[#16213A]">{{ $dealer->code }}</dd> 
                             
                     </div> 
                 
@@ -26,11 +26,11 @@
                     
                         <dt class="uppercase tracking-[0.1em] text-xs text-slate-800">Nama Dealer :</dt> 
                     
-                        <dd class="font-medium text-[#16213A]">Abdul Saiful</dd> 
+                        <dd class="font-medium text-[#16213A]">{{ $dealer->name }}</dd> 
                     </div> 
                     <div class="flex justify-end gap-3 p-6">
                     <a href="{{ route('dealers.index') }}" class="bg-blue-400 h-auto font-bold w-auto p-2 rounded-lg text-white">Kembali</a>
-                    <a href="{{ route('dealers.edit', 1) }}" class="bg-gray-400 h-auto font-bold w-auto p-2 rounded-lg text-white">Edit</a>
+                    <a href="{{ route('dealers.edit', ['dealer'=>$dealer->id]) }}" class="bg-gray-400 h-auto font-bold w-auto p-2 rounded-lg text-white">Edit</a>
                 </div>
         </div>
     </div>
