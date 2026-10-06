@@ -56,7 +56,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center p-4 py-2">Data Dealer Tidak Tersedia</td>
+                        <td colspan="6" class="text-center p-4 py-2">Data pada {{ $title }} tidak tersedia</td>
                     </tr>
                     @endforelse
                 </tbody>

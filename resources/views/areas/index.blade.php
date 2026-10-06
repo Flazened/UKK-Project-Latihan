@@ -50,7 +50,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="p-2 py-4 text-center" colspan="4">Data pada {{ $title }} tidak tersedit </td>
+                        <td colspan="6" class="p-2 py-4 text-center" colspan="4">Data pada {{ $title }} tidak tersedia </td>
                     </tr>
                 @endforelse
                 </tbody>    
