@@ -82,10 +82,25 @@ class DealerController extends Controller
             ->with('succes', 'Berhasil Mengubah data Dealer');
     }
 
-    public function destroy(Dealer $dealer)
+    public function destroy(Dealer $dealer, Request $request)
     {
+        // 1. Keamanan: Pastikan hanya Supervisor yang boleh menghapus
+        if ($request->user()->role !== 'supervisor') {
+            abort(403, 'Hanya supervisor yang dapat menghapus data dealer.');
+        }
+    
+        // 2. Hapus User terlebih dahulu (Parent)
+        // Karena ada foreign key constraint, user harus dihapus sebelum dealer
+        // atau gunakan cascade delete jika sudah dikonfigurasi di migration
+        if ($dealer->user) {
+            $dealer->user->delete();
+        }
+    
+        // 3. Baru hapus record Dealer
         $dealer->delete();
-
-        return redirect()->route('dealers.index');
+    
+        // 4. Redirect dengan pesan sukses
+        return redirect()->route('dealers.index')
+            ->with('success', 'Data dealer dan akun terkait berhasil dihapus.');
     }
 }

@@ -7,9 +7,14 @@
             <a href="{{ route('areas.index') }}">Area</a>
             <a href="{{ route('tasks.index') }}">Tugas</a>
         </div> 
-        <div class="flex justify-end text-white font-black -mt-6.5">
-            <button>Logout</button>
-        </div>   
+
+        <form action="{{ route('logout') }}" method="POST">
+            <div class="flex justify-end text-white font-black -mt-6.5">
+                <button type="submit">
+                    Logout
+                </button>
+            </div>
+        </form>   
     
     </div>
     
