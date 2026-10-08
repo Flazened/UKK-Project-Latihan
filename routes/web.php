@@ -14,13 +14,20 @@ Route::get('/', function () {
 
 
 //Auth
+Route::middleware('guest')->group(function (){
+
 Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login-post');
 
 Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('register-post');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+
 
 
 
@@ -33,7 +40,6 @@ Route::name('dealers.')->prefix('dealers')->group(function () {
     Route::get('/create', [DealerController::class, 'create'])->name('create');
     Route::get('/{dealer}/edit', [DealerController::class, 'edit'])->name('edit');
     Route::get('/{dealer}', [DealerController::class, 'show'])->name('show');
-
 
     //Logical
     Route::post('/', [DealerController::class, 'store'])->name('store');

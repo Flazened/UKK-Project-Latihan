@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dealer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DealerController extends Controller
@@ -12,18 +13,15 @@ class DealerController extends Controller
     public function index()
     {
 
-
         $title = "Halaman Dealers";
-        if (auth()->user()->role === 'supervisor') {
-            $dealers  = Dealer::all();
-        } else {
-            $dealers = Dealer::where('user_id', auth()->id())->get();
-        }
+        $dealers = Dealer::select('id', 'name', 'code')->get();
+        $users = User::orderBy('name')->get();
 
 
         return view('dealers.index', [
             'title' => $title,
-            'dealers' => $dealers
+            'dealers' => $dealers,
+            'users' => $users
         ]);
     }
 

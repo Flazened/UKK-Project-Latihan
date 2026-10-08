@@ -32,7 +32,8 @@
                 @error('name') 
                     <p class="text-red-500 pt-2">{{ $message }}</p> 
                 @enderror 
-            </div> 
+            </div>
+            
 
             <div> 
                 <label for="email" 

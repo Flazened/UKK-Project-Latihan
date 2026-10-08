@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dealer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,21 +29,34 @@ class AuthController extends Controller
            
         ]);
         
-        User::create($validatedRequest);
+        $user = User::create($validatedRequest);
 
-        return redirect()->route('login.view');
+        If ($user->role === 'dealer') {
+            Dealer::create([
+               'name' => $user->name,
+               'code' => null, //Diisi oleh supervisor
+               'user_id' => $user->id 
+            ]);
+        }
+
+        return redirect()->route('login-view');
     }
 
     public function loginPost(Request $request){
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'name' => ['required'],
+            'password' => ['required']
         ]);
 
         if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect()->route('dealer.index');
+            $request->session()->regenerate();            
+        
+            if(Auth::user()->role === 'supervisor') {
+                return redirect()->route('tasks.index');
+            } 
+                return redirect()->route('dealers.index');
         }
+    
         
         return back()->withErrors([
             'email' => 'Email atau kata sandi salah.',

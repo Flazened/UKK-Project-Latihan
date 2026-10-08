@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Table('dealers')]
-#[Fillable('name','code')]
+#[Fillable('name','code, user_id')]
 
 class Dealer extends Model
 {
-    //
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
