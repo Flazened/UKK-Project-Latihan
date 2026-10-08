@@ -18,7 +18,7 @@
                             
                         <dt class="uppercase tracking-[0.1em] text-xs text-slate-800">Code Departemen :</dt> 
                             
-                        <dd class="font-medium text-[#16213A]">{{ old('code', $department->code) }}</dd> 
+                        <dd class="font-medium text-[#16213A]">{{ old('code', $departments->code) }}</dd> 
                             
                     </div> 
                 
@@ -26,12 +26,12 @@
                     
                         <dt class="uppercase tracking-[0.1em] text-xs text-slate-800">Nama Departemen :</dt> 
                     
-                        <dd class="font-medium text-[#16213A]">{{ old('name', $department->name) }}</dd> 
+                        <dd class="font-medium text-[#16213A]">{{ old('name', $departments->name) }}</dd> 
 
                     </div> 
                     <div class="flex justify-end gap-3 p-6">
                     <a href="{{ route('departments.index') }}" class="bg-blue-400 h-auto font-bold w-auto p-2 rounded-lg text-white">Kembali</a>
-                    <a href="{{ route('departments.edit', $department->id) }}" class="bg-gray-400 h-auto font-bold w-auto p-2 rounded-lg text-white">Edit</a>
+                    <a href="{{ route('departments.edit', ['department' => $department->id]) }}" class="bg-gray-400 h-auto font-bold w-auto p-2 rounded-lg text-white">Edit</a>
                 </div>
         </div>
     </div>

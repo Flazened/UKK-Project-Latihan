@@ -2,78 +2,101 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
+use App\Models\Department;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
 
-    public function index(Request $request){
-
-        $title = "Halaman Tugas";
-
+    public function index(Request $request)
+    {
+        $title = 'Halaman Tugas';
+        $tasks = Task::select('id', 'title', 'department_id', 'area_id', 'due_at', 'asigner')->get();
 
         return view('tasks.index', [
             'title' => $title,
-
+            'tasks' => $tasks
         ]);
     }
 
-    public function create(){
-
+    public function create()
+    {
         $title = 'Halaman Tambah Tugas';
+        $departments = Department::orderBy('name')->get();
+        $areas = Area::orderBy('name')->get();
 
         return view('tasks.create', [
-            'title'=> $title
+            'title' => $title,
+            'departments' => $departments,
+            'areas' => $areas
         ]);
     }
 
-    public function show(Task $task){
+    public function show(Task $task)
+    {
         $title = 'Halaman Detail Tugas';
+        $departments = Department::orderBy('name')->get();
+        $areas = Area::orderBy('name')->get();
 
         return view('tasks.show', [
             'title' => $title,
-            'task' => $task
+            'task' => $task,
+            'departments' => $departments,
+            'areas' => $areas
         ]);
     }
 
-    public function edit(Task $task){
+    public function edit(Task $task)
+    {
         $title = 'Halaman Edit Tugas';
-        
+        $departments = Department::orderBy('name')->get();
+        $areas = Area::orderBy('name')->get();
+
         return view('tasks.edit', [
             'title' => $title,
-            'task' => $task
+            'task' => $task,
+            'departments' => $departments,
+            'areas' => $areas
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validatedRequest = $request->validate([
-            'name' => ['required', 'string'],
-            'code' => ['required', 'string', 'size:4', 'unique:tasks,code,']   
+            'title' => ['required', 'string'],
+            'department_id' => ['required', 'exists:departments,id'],
+            'area_id' => ['required', 'exists:areas,id'],
+            'asigner' => ['required', 'string'],
+            'due_at' => ['required', 'date', 'after_or_equal:today']
         ]);
 
         Task::create($validatedRequest);
 
         return redirect()->route('tasks.index')
-            ->with('Succes', 'Tugas Berhasil Ditambahkan');
+            ->with('success', '');
     }
 
-    public function update(Request $request , Task $task){
+    public function update(Request $request, Task $task) {
         $validatedRequest = $request->validate([
-            'name' => ['required', 'string'],
-            'code' => ['required', 'string',  'size:4', 'unique:tasks,code,' . $task->id],
+            'title' => ['required', 'string'],
+            'department_id' => ['required', 'exists:departments,id'],
+            'area_id' => ['required', 'exists:areas,id'],
+            'asigner' => ['required', 'string'],
+            'due_at' => ['required', 'date']
         ]);
 
         $task->update($validatedRequest);
 
         return redirect()->route('tasks.index')
-            ->with('Succes', 'Tugas Berhasil diubah');
+            ->with('Succes', 'Data Tugas Berhasil diperbaruhi');
     }
-
-    public function destroy(Task $task){
+        
+    public function destroy(Task $task) {
         $task->delete();
 
         return redirect()->route('tasks.index')
-            ->with('Succes', 'Tugas Berhasil diubah');
+            ->with('Succes', 'Tugas telah dihapus');
     }
 }
