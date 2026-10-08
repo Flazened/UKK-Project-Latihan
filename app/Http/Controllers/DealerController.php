@@ -12,8 +12,13 @@ class DealerController extends Controller
     public function index()
     {
 
+
         $title = "Halaman Dealers";
-        $dealers = Dealer::select('id', 'name', 'code')->get();
+        if (auth()->user()->role === 'supervisor') {
+            $dealers  = Dealer::all();
+        } else {
+            $dealers = Dealer::where('user_id', auth()->id())->get();
+        }
 
 
         return view('dealers.index', [

@@ -44,6 +44,17 @@
                 @enderror 
             </div> 
 
+            <div>
+                <label for="role" class="block text-sm font-medium text-slate-700">Role</label>
+                <select name="role" id="role" 
+                    class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+                    <option value="">Pilih Role</option>
+                    <option value="dealer">Dealer</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
+                @error('role')<span class="text-red-500 text-xs">{{ $message }}</span>@enderror
+            </div>
+
             <div> 
                 <label for="password" 
                     class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-[#16213A]">Kata 

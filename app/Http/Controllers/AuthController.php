@@ -23,16 +23,12 @@ class AuthController extends Controller
         $validatedRequest = $request->validate([
            'name' => ['required', 'string'],
            'email' => ['required', 'string', 'email', 'unique:users,email'],
-           'password' => ['required', 'string', 'confirmed', 'min:5'] 
+           'password' => ['required', 'string', 'confirmed', 'min:5'],
+           'role' => ['required', 'in:dealer,supervisor']
            
         ]);
         
-        User::create([
-           'name' => $validatedRequest['name'],
-           'email' => $validatedRequest['email'],
-           'password' => bcrypt($validatedRequest['password']),
-           'role' => 'dealer', 
-        ]);
+        User::create($validatedRequest);
 
         return redirect()->route('login.view');
     }
