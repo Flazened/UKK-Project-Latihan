@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Table('dealers')]
-#[Fillable('name','code, user_id')]
+#[Fillable('name','code','user_id')]
 
 class Dealer extends Model
 {
