@@ -31,7 +31,7 @@ class AuthController extends Controller
         
         $user = User::create($validatedRequest);
 
-        If ($user->role === 'dealer') {
+        if ($user->role === 'dealer') {
             Dealer::create([
                'name' => $user->name,
                'code' => null, //Diisi oleh supervisor

@@ -103,6 +103,8 @@ Route::name('tasks.')->prefix('tasks')->group(function () {
 
 
     //Logical
+    Route::post('/{task}/collect', [TaskController::class,'storeCollect'])->name('collect.store');
+    Route::post('/review/{submission}', [TaskController::class,'reviewSubmission'])->name('review');
     Route::post('/', [TaskController::class, 'store'])->name('store');
     Route::put('/{task}', [TaskController::class, 'update'])->name('update');
     Route::delete('/{task}', [TaskController::class, 'destroy'])->name('destroy');
