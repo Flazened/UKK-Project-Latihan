@@ -34,6 +34,32 @@ class TaskController extends Controller
         ]);
     }
 
+        public function manage(Task $task){
+        $title = 'Halamana Kirim Tugas';
+        $departments = Department::orderBy('name')->get();
+        $areas = Area::orderBy('name')->get();
+
+        return view('tasks.collect', [
+            'title' => $title,
+            'task' => $task,
+            'departments' => $departments,
+            'areas' => $areas
+        ]);
+    }
+
+    public function collect(Task $task){
+        $title = 'Halaman Manage Tugas';
+        $departments = Department::orderBy('name')->get();
+        $areas = Area::orderBy('name')->get();
+
+        return view('tasks.manage', [
+            'title' => $title,
+            'task' => $task,
+            'departments' => $departments,
+            'areas' => $areas
+        ]);
+    }
+
     public function show(Task $task)
     {
         $title = 'Halaman Detail Tugas';
@@ -99,4 +125,8 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')
             ->with('Succes', 'Tugas telah dihapus');
     }
+
+
 }
+
+

@@ -10,7 +10,7 @@
         <div class="flex justify-between">
             <div class="mb-10 flex justify-center p-5 rounded-3xl border-[1px] bg-black h-auto w-auto">
                 <button>
-                    <a href="" class="text-white font-black">Periksa Tugas</a>
+                    <a href="{{ route('tasks.manage') }}" class="text-white font-black">Periksa Tugas</a>
                 </button>
             </div>
             <div class="mb-10 flex justify-center p-5 rounded-3xl border-[1px] bg-black h-auto w-auto">
@@ -73,7 +73,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center p-4 py-4">Data pada {{ $title }} tidak tersedia</td>
+                        <td colspan="7" class="text-center p-4 py-4">Data pada {{ $title }} tidak tersedia</td>
                     </tr>
                     @endforelse
                 </tbody>
