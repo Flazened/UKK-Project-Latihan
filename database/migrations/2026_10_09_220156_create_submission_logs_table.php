@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('submission_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('submissions_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('submission_id')->constrained()->cascadeOnDelete();
             $table->string('activity');
             $table->text('note')->nullable();
             $table->timestamps();

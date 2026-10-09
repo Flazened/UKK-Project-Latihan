@@ -10,12 +10,12 @@
         <div class="flex justify-between">
             <div class="mb-10 flex justify-center p-5 rounded-3xl border-[1px] bg-black h-auto w-auto">
                 <button>
-                    <a href="{{ route('tasks.manage') }}" class="text-white font-black">Periksa Tugas</a>
+                    <a href="{{ route('tasks.manage', $task->id) }}" class="text-white font-black">Periksa Tugas</a>
                 </button>
             </div>
             <div class="mb-10 flex justify-center p-5 rounded-3xl border-[1px] bg-black h-auto w-auto">
                 <button>
-                    <a href="{{ route('tasks.create') }}" class="text-white font-black">Tambah</a>
+                    <a href="{{ route('tasks.collect', $task->id) }}" class="text-white font-black">Tambah</a>
                 </button>
             </div>
         </div>

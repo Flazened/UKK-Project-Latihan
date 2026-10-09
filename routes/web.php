@@ -93,10 +93,10 @@ Route::name('tasks.')->prefix('tasks')->group(function () {
     Route::get('/create', [TaskController::class, 'create'])->name('create');
 
     //Manage and Collect
-    Route::get('/manage', [TaskController::class, 'manage'])->name('manage');
-    Route::get('/collect', [TaskController::class, 'collect'])->name('collect');
+    Route::get('/{$task}/manage', [TaskController::class, 'manage'])->name('manage');
+    Route::get('/{$task}/collect', [TaskController::class, 'collect'])->name('collect');
 
-    //Page with logic
+    //Pageagy
     Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('edit');
     Route::get('/{task}', [TaskController::class, 'show'])->name('show');
 
