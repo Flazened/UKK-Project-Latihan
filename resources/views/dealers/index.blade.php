@@ -35,7 +35,7 @@
                                 {{ $loop->iteration }}
                             </td>
                             <td class="px-2">
-                                {{ $dealer->code }}
+                                {{ $loop->index + 1000 }}
                             </td>
                             <td class="px-2">
                                 {{ $dealer->name }}

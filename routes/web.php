@@ -14,13 +14,19 @@ Route::get('/', function () {
 
 
 //Auth
-Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
-Route::post('/login', [AuthController::class, 'loginPost'])->name('login-post');
+Route::middleware('guest')->group(function () {
 
-Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
-Route::post('/register', [AuthController::class, 'registerPost'])->name('register-post');
+    Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
+    Route::post('/login', [AuthController::class, 'loginPost'])->name('login-post');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
+    Route::post('/register', [AuthController::class, 'registerPost'])->name('register-post');
+});
+
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+
 
 
 
@@ -33,7 +39,6 @@ Route::name('dealers.')->prefix('dealers')->group(function () {
     Route::get('/create', [DealerController::class, 'create'])->name('create');
     Route::get('/{dealer}/edit', [DealerController::class, 'edit'])->name('edit');
     Route::get('/{dealer}', [DealerController::class, 'show'])->name('show');
-
 
     //Logical
     Route::post('/', [DealerController::class, 'store'])->name('store');
@@ -82,17 +87,28 @@ Route::name('areas.')->prefix('areas')->group(function () {
 //Task
 Route::name('tasks.')->prefix('tasks')->group(function () {
 
-    //Page
+    // Static
     Route::get('/', [TaskController::class, 'index'])->name('index');
     Route::get('/create', [TaskController::class, 'create'])->name('create');
-    Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('edit');
-    Route::get('/{task}', [TaskController::class, 'show'])->name('show');
 
-
-    //Logical
+    // Logical
     Route::post('/', [TaskController::class, 'store'])->name('store');
     Route::put('/{task}', [TaskController::class, 'update'])->name('update');
     Route::delete('/{task}', [TaskController::class, 'destroy'])->name('destroy');
+
+    // Manage & Collect (supervisor vs siswa)
+    Route::get('/{task}/manage', [TaskController::class, 'manage'])->name('manage');
+    Route::get('/{task}/collect', [TaskController::class, 'collect'])->name('collect');
+
+    // Kirim tugas (siswa)
+    Route::post('/{task}/collect', [TaskController::class, 'storeCollect'])->name('collect.store');
+
+    // Review (supervisor)
+    Route::post('/review/{submission}', [TaskController::class, 'reviewSubmission'])->name('review');
+
+    // Dynamic paling bawah
+    Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('edit');
+    Route::get('/{task}', [TaskController::class, 'show'])->name('show');
 });
 
 //ManageTask

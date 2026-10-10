@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dealers', function (Blueprint $table) {
+        Schema::create('submission_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code', 4)->nullable()->unique('code');
+            $table->foreignId('submission_id')->constrained()->cascadeOnDelete();
+            $table->enum('activity', ['KUMPUL', 'PENGUMPULAN_ULANG', 'REVIEW']);
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dealers');
+        Schema::dropIfExists('submission_logs');
     }
 };

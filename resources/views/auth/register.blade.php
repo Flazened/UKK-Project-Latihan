@@ -20,7 +20,7 @@
             <p class="mt-1 text-sm text-slate-500">Buat akun baru untuk mulai menggunakan sistem.</p> 
         </div> 
 
-        <form action="#" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8"> 
+        <form action="{{ route('register-post') }}" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8"> 
             @csrf 
 
             <div> 
@@ -32,7 +32,8 @@
                 @error('name') 
                     <p class="text-red-500 pt-2">{{ $message }}</p> 
                 @enderror 
-            </div> 
+            </div>
+
 
             <div> 
                 <label for="email" 
@@ -43,6 +44,17 @@
                     <p class="text-red-500 pt-2">{{ $message }}</p> 
                 @enderror 
             </div> 
+
+            <div>
+                <label for="role" class="block text-sm font-medium text-slate-700">Role</label>
+                <select name="role" id="role" 
+                    class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+                    <option value="">Pilih Role</option>
+                    <option value="dealer">Dealer</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
+                @error('role')<span class="text-red-500 text-xs">{{ $message }}</span>@enderror
+            </div>
 
             <div> 
                 <label for="password" 
