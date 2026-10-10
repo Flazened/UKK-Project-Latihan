@@ -52,14 +52,14 @@ class TaskController extends Controller
 
     public function collect(Task $task){
         $title = 'Halaman Manage Tugas';
-        $departments = Department::orderBy('name')->get();
-        $areas = Area::orderBy('name')->get();
+        $submission = Submission::where('task_id', $task->id)
+            ->where('dealer_id', auth()->id())
+            ->first();
 
         return view('tasks.collect', [
             'title' => $title,
-            'task' => $task,
-            'departments' => $departments,
-            'areas' => $areas
+            'submission' => $submission
+
         ]);
     }
 
