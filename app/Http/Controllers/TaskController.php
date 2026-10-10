@@ -37,31 +37,6 @@ class TaskController extends Controller
         ]);
     }
 
-        public function manage(Task $task){
-        $title = 'Halamana Kirim Tugas';
-        $departments = Department::orderBy('name')->get();
-        $areas = Area::orderBy('name')->get();
-
-        return view('tasks.manage', [
-            'title' => $title,
-            'task' => $task,
-            'departments' => $departments,
-            'areas' => $areas
-        ]);
-    }
-
-    public function collect(Task $task){
-        $title = 'Halaman Manage Tugas';
-        $submission = Submission::where('task_id', $task->id)
-            ->where('dealer_id', auth()->id())
-            ->first();
-
-        return view('tasks.collect', [
-            'title' => $title,
-            'submission' => $submission
-
-        ]);
-    }
 
     public function show(Task $task)
     {
