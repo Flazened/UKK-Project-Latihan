@@ -94,13 +94,13 @@ Route::name('tasks.')->prefix('tasks')->group(function () {
 
     //Manage and Collect
     Route::get('/manage', [TaskController::class, 'manage'])->name('manage');
-    Route::get('/collect', [TaskController::class, 'collect'])->name('collect');
+    Route::get('/{task}/collect', [TaskController::class, 'collect'])->name('collect');
 
     //Page with logic
     Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('edit');
     Route::get('/{task}', [TaskController::class, 'show'])->name('show');
 
-
+   
 
     //Logical
     Route::post('/', [TaskController::class, 'store'])->name('store');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Department;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -26,11 +27,13 @@ class TaskController extends Controller
         $title = 'Halaman Tambah Tugas';
         $departments = Department::orderBy('name')->get();
         $areas = Area::orderBy('name')->get();
+        $users = User::orderBy('role')->get();
 
         return view('tasks.create', [
             'title' => $title,
             'departments' => $departments,
-            'areas' => $areas
+            'areas' => $areas,
+            'users' => $users
         ]);
     }
 
@@ -39,7 +42,7 @@ class TaskController extends Controller
         $departments = Department::orderBy('name')->get();
         $areas = Area::orderBy('name')->get();
 
-        return view('tasks.collect', [
+        return view('tasks.manage', [
             'title' => $title,
             'task' => $task,
             'departments' => $departments,
@@ -52,7 +55,7 @@ class TaskController extends Controller
         $departments = Department::orderBy('name')->get();
         $areas = Area::orderBy('name')->get();
 
-        return view('tasks.manage', [
+        return view('tasks.collect', [
             'title' => $title,
             'task' => $task,
             'departments' => $departments,

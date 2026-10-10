@@ -54,7 +54,7 @@ class AuthController extends Controller
             if(Auth::user()->role === 'supervisor') {
                 return redirect()->route('tasks.index');
             } 
-                return redirect()->route('dealers.index');
+                return redirect()->route('tasks.index');
         }
     
         
