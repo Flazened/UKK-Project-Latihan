@@ -33,6 +33,6 @@ class User extends Authenticatable
 
     public function dealer(): HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Dealer::class);
     }
 }

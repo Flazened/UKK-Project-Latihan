@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable('task_id', 'dealer_id', 'link_drive', 'note', 'status', 'supervisor_note', 'submitted_at')]
 class Submission extends Model
 {
+    protected $casts = [
+    'submitted_at' => 'datetime',
+    ];
     public function task(): BelongsTo
     {
         return $this->belongsTo(Task::class);
@@ -24,6 +27,6 @@ class Submission extends Model
 
     public function logs(): HasMany
     {
-        return $this->hasMany(SubmissionLog::class);
+        return $this->hasMany(SubmissionLog::class)->latest();
     }
 }

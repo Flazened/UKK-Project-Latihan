@@ -54,7 +54,7 @@
                             </td>
                             <td class="flex gap-2 justify-center px-2 py-2">
                                 @if (auth()->user()->role === 'supervisor')
-                                    <a href="{{ route('tasks.manage') }}"
+                                    <a href="{{ route('tasks.manage', ['task' => $task->id]) }}"
                                         class="bg-yellow-400 font-black text-white px-4 py-2 rounded-md">Check</a>
 
                                     {{-- @if () belum waktunya aja --}}
@@ -74,7 +74,7 @@
                                     {{-- @endif --}}
 
                                 @else
-                                    <a href="{{ route('tasks.edit', ['task' => $task->id]) }}"
+                                    <a href="{{ route('tasks.collect', ['task' => $task->id]) }}"
                                         class="bg-yellow-400 font-black text-white px-4 py-2 rounded-md">Kumpul</a>
                                 @endif
 
